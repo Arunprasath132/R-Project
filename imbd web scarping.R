@@ -1,0 +1,13 @@
+library(rvest)
+library(dplyr)
+link='https://www.imdb.com/india/top-rated-tamil-movies/'
+web=read_html(link)
+name=web%>%html_nodes(".titleColumn a")%>%html_text()
+View(name)
+year=web%>%html_node(".secondaryInfo")%>%html_text()
+View(year)
+rating=web%>%html_nodes("strong")%>%html_text()
+View(rating)
+movierating=data.frame(name,year,rating)
+View(movierating)
+write.csv(movierating,'tamil movie list')

@@ -1,0 +1,13 @@
+library(rvest)
+library(dplyr)
+link='https://www.goodreads.com/list/show/61356.Best_Tamil_Classics_You_Must_Read'
+web=read_html(link)
+bookname=web%>%html_nodes(".bookTitle span")%>%html_text()
+View(bookname)
+author=web%>%html_nodes(".authorName span")%>%html_text()
+View(author)
+score=web%>%html_nodes(".uitext a:nth-child(1)")%>%html_text()
+View(score)
+novels=data.frame(bookname,author,score)
+View(novels)
+write.csv(novels,'tamil novel list.csv')
